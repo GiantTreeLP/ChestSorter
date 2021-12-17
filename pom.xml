@@ -14,8 +14,8 @@
     <description>Sorts chests via commands</description>
     <properties>
         <java.version>17</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>1.6.10</kotlin.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <url>https://github.com/GiantTreeLP/ChestSorter</url>
 
@@ -64,6 +64,36 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <minimizeJar>true</minimizeJar>
+                            <finalName>DeepStorageUnits</finalName>
+                            <relocations>
+                                <relocation>
+                                    <pattern/>
+                                    <shadedPattern>de.gianttree.mc.chestsorter.
+                                    </shadedPattern>
+                                    <includes>
+                                        <include>org.jetbrains.**</include>
+                                        <include>kotlin.**</include>
+                                        <include>kotlinx.**</include>
+                                        <include>org.intellij.**</include>
+                                    </includes>
+                                </relocation>
+                            </relocations>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.DontIncludeResourceTransformer">
+                                    <resource>META-INF/MANIFEST.MF</resource>
+                                </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer">
+                                </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer">
+                                    <addHeader>false</addHeader>
+                                </transformer>
+                            </transformers>
                         </configuration>
                     </execution>
                 </executions>
