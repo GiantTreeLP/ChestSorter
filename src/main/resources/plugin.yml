@@ -1,0 +1,7 @@
+name: ChestSorter
+version: '${project.version}'
+main: de.gianttree.mc.chestsorter.ChestSorter
+api-version: 1.18
+authors: [ GiantTree ]
+description: Sorts chests via commands
+website: https://github.com/GiantTreeLP/ChestSorter
