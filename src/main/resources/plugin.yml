@@ -5,3 +5,12 @@ api-version: 1.18
 authors: [ GiantTree ]
 description: Sorts chests via commands
 website: https://github.com/GiantTreeLP/ChestSorter
+
+commands:
+  chestsorter:
+    aliases:
+      - sort
+      - chests
+    permission: chestsorter.sort
+    usage: 'Usage: /<command> [x y z]'
+    description: Sorts the given chest or the one you are looking at.
