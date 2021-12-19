@@ -9,7 +9,8 @@ import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
-import org.bukkit.block.Chest
+import org.bukkit.block.Block
+import org.bukkit.block.Container
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabExecutor
@@ -59,14 +60,21 @@ class ChestSorterCommand : TabExecutor {
         } else {
             null
         }
-        if (targetBlock?.state !is Chest) {
+        if (targetBlock?.state !is Container) {
             sender.sendMessage(
-                Component.text("The specified block is not a chest").color(NamedTextColor.RED)
+                Component.text("The specified block does not have a compatible inventory").color(NamedTextColor.RED)
             )
             return false
         }
-        var chest = targetBlock.state as Chest
-        var inventory = chest.inventory
+        return sortContainer(sender, targetBlock)
+    }
+
+    private fun sortContainer(
+        sender: CommandSender,
+        targetBlock: Block
+    ): Boolean {
+        var container = targetBlock.state as Container
+        var inventory = container.inventory
 
         val items = mutableListOf<ItemStack>()
         val indices = mutableListOf<Int>()
@@ -76,6 +84,11 @@ class ChestSorterCommand : TabExecutor {
                 inventory,
                 SortingPlayer(sender)
             )
+
+            if (view.getSlotType(slot) != InventoryType.SlotType.CONTAINER) {
+                continue // Skip non-container slots
+            }
+
 
             val event = InventoryClickEvent(
                 view,
@@ -91,8 +104,8 @@ class ChestSorterCommand : TabExecutor {
 
                 if (cursor != null && cursor.type != Material.AIR) {
                     items.add(cursor)
-                    chest = targetBlock.location.block.state as Chest
-                    inventory = chest.inventory
+                    container = targetBlock.location.block.state as Container
+                    inventory = container.inventory
                     continue
                 }
 
@@ -109,8 +122,8 @@ class ChestSorterCommand : TabExecutor {
                 if (cursor != null && cursor.type != Material.AIR) {
                     indices.add(slot)
                     items.add(cursor)
-                    chest = targetBlock.location.block.state as Chest
-                    inventory = chest.inventory
+                    container = targetBlock.location.block.state as Container
+                    inventory = container.inventory
                     continue
                 }
             }
@@ -138,17 +151,18 @@ class ChestSorterCommand : TabExecutor {
             if (event.callEvent()) {
                 val cursor = event.cursor
                 if (cursor == null || cursor.type == Material.AIR) {
-                    chest = targetBlock.location.block.state as Chest
-                    inventory = chest.inventory
+                    container = targetBlock.location.block.state as Container
+                    inventory = container.inventory
                     // nothing to do, event did handle it
                 } else {
                     inventory.setItem(slot, item)
                 }
             } else {
                 val cursor = event.cursor
-                chest = targetBlock.location.block.state as Chest
-                inventory = chest.inventory
+                container = targetBlock.location.block.state as Container
+                inventory = container.inventory
                 if (cursor == null || cursor.type == Material.AIR) {
+                    // even though the event was cancelled, it did handle placing the item
                 } else {
                     sender.sendMessage(
                         Component.text("Could only retrieve, but not place item in slot $slot!")
