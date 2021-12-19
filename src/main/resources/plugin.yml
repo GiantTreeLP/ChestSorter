@@ -12,5 +12,5 @@ commands:
       - sort
       - chests
     permission: chestsorter.sort
-    usage: 'Usage: /<command> [x y z]'
+    usage: 'Usage: /<command> [x y z] [dimension]'
     description: Sorts the given chest or the one you are looking at.
