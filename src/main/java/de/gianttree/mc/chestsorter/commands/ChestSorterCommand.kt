@@ -82,7 +82,7 @@ class ChestSorterCommand : TabExecutor {
         for (slot in 0 until inventory.size) {
             val view = SortingView(
                 inventory,
-                SortingPlayer(sender)
+                SortingPlayer(sender, targetBlock.location)
             )
 
             if (view.getSlotType(slot) != InventoryType.SlotType.CONTAINER) {
@@ -134,7 +134,7 @@ class ChestSorterCommand : TabExecutor {
         sortedItems.removeIf { it.type == Material.AIR }
 
         indices.zip(sortedItems).forEach { (slot, item) ->
-            val player = SortingPlayer(sender)
+            val player = SortingPlayer(sender, targetBlock.location)
             player.cursor = item
             val view = SortingView(
                 inventory,

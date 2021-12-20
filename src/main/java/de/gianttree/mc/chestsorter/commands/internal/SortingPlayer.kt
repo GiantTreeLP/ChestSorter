@@ -32,7 +32,10 @@ import org.bukkit.util.RayTraceResult
 import org.bukkit.util.Vector
 import java.util.*
 
-class SortingPlayer(private val sender: CommandSender) : HumanEntity {
+class SortingPlayer(
+    private val sender: CommandSender,
+    private val location: Location
+) : HumanEntity {
 
     internal var cursor: ItemStack = ItemStack(Material.AIR)
     internal var inventory: PlayerInventory = SortingPlayerInventory(Bukkit.createInventory(null, InventoryType.PLAYER))
@@ -166,11 +169,13 @@ class SortingPlayer(private val sender: CommandSender) : HumanEntity {
     }
 
     override fun getLocation(): Location {
-        TODO("Not yet implemented")
+        return this.location
     }
 
     override fun getLocation(loc: Location?): Location? {
-        TODO("Not yet implemented")
+        loc?.set(this.location.x, this.location.y, this.location.z)
+        loc?.direction = this.location.direction
+        return loc
     }
 
     override fun setVelocity(velocity: Vector) {
@@ -202,7 +207,7 @@ class SortingPlayer(private val sender: CommandSender) : HumanEntity {
     }
 
     override fun getWorld(): World {
-        TODO("Not yet implemented")
+        return this.location.world
     }
 
     override fun setRotation(yaw: Float, pitch: Float) {
@@ -350,7 +355,7 @@ class SortingPlayer(private val sender: CommandSender) : HumanEntity {
     }
 
     override fun getType(): EntityType {
-        TODO("Not yet implemented")
+        return EntityType.UNKNOWN
     }
 
     override fun isInsideVehicle(): Boolean {
@@ -810,7 +815,7 @@ class SortingPlayer(private val sender: CommandSender) : HumanEntity {
     }
 
     override fun getCategory(): EntityCategory {
-        TODO("Not yet implemented")
+        return EntityCategory.NONE
     }
 
     override fun setInvisible(invisible: Boolean) {
