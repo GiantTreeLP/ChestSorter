@@ -119,8 +119,7 @@
                             <relocations>
                                 <relocation>
                                     <pattern/>
-                                    <shadedPattern>de.gianttree.mc.chestsorter.
-                                    </shadedPattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.</shadedPattern>
                                     <includes>
                                         <include>org.jetbrains.**</include>
                                         <include>kotlin.**</include>
@@ -144,6 +143,19 @@
                                     <addHeader>false</addHeader>
                                 </transformer>
                             </transformers>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                        <exclude>**/*.kotlin_metadata</exclude>
+                                        <exlucde>**/*.kotlin_builtins</exlucde>
+                                        <exclude>**/*.kotlin_module</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                         </configuration>
                     </execution>
                 </executions>
@@ -167,6 +179,7 @@
                     <outjar>${project.finalName}-obf.jar</outjar>
                     <options>
                         <option>-allowaccessmodification</option>
+                        <option>-optimizationpasses 2</option>
                         <option>-mergeinterfacesaggressively</option>
                         <option>-printmapping mapping.txt</option>
                         <option>-overloadaggressively</option>
@@ -183,6 +196,14 @@
                             public void onUnload();
                             }
                         </option>
+                        <!-- Bukkit Event Handlers-->
+                        <option>
+                            -keep,includecode,allowobfuscation public class * extends org.bukkit.event.Listener {
+                            @org.bukkit.event.EventHandler
+                            public void *(***);
+                            }
+                        </option>
+                        <option>-keepattributes *Annotation*</option>
                     </options>
                     <libs>
                         <lib>${java.home}/jmods/java.base.jmod</lib>
