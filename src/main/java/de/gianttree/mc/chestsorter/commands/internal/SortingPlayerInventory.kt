@@ -6,7 +6,7 @@ import org.bukkit.entity.HumanEntity
 import org.bukkit.event.inventory.InventoryType
 import org.bukkit.inventory.*
 
-class SortingPlayerInventory(private val inventory: Inventory): PlayerInventory {
+class SortingPlayerInventory(private val inventory: Inventory) : PlayerInventory {
     override fun iterator(): MutableListIterator<ItemStack> {
         return this.inventory.iterator()
     }
@@ -59,15 +59,15 @@ class SortingPlayerInventory(private val inventory: Inventory): PlayerInventory 
         return this.inventory.contents
     }
 
-    override fun setContents(items: Array<out ItemStack>) {
-        this.inventory.setContents(items)
+    override fun setContents(items: Array<out ItemStack?>?) {
+        this.inventory.contents = items
     }
 
-    override fun getStorageContents(): Array<ItemStack> {
+    override fun getStorageContents(): Array<out ItemStack?>? {
         return this.inventory.storageContents
     }
 
-    override fun setStorageContents(items: Array<out ItemStack>) {
+    override fun setStorageContents(items: Array<out ItemStack?>?) {
         this.inventory.storageContents = items
     }
 
@@ -112,7 +112,7 @@ class SortingPlayerInventory(private val inventory: Inventory): PlayerInventory 
     }
 
     override fun isEmpty(): Boolean {
-        return this.inventory.isEmpty()
+        return this.inventory.isEmpty
     }
 
     override fun remove(material: Material) {

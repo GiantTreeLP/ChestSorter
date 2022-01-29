@@ -1,4 +1,3 @@
-
 package de.gianttree.mc.chestsorter.commands.internal
 
 import com.destroystokyo.paper.ClientOption
@@ -152,6 +151,14 @@ class SortingPlayer(
     }
 
     override fun playSound(location: Location, sound: String, category: SoundCategory, volume: Float, pitch: Float) {
+        TODO("Not yet implemented")
+    }
+
+    override fun playSound(entity: Entity, sound: Sound, volume: Float, pitch: Float) {
+        TODO("Not yet implemented")
+    }
+
+    override fun playSound(entity: Entity, sound: Sound, category: SoundCategory, volume: Float, pitch: Float) {
         TODO("Not yet implemented")
     }
 
@@ -366,6 +373,14 @@ class SortingPlayer(
     }
 
     override fun isFrozen(): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun isFreezeTickingLocked(): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun lockFreezeTicks(locked: Boolean) {
         TODO("Not yet implemented")
     }
 
@@ -594,6 +609,10 @@ class SortingPlayer(
     }
 
     override fun spawnAt(location: Location, reason: CreatureSpawnEvent.SpawnReason): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun isInPowderedSnow(): Boolean {
         TODO("Not yet implemented")
     }
 
@@ -1581,6 +1600,10 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    override fun sendMultiBlockChange(blockChanges: MutableMap<Location, BlockData>, suppressLightUpdates: Boolean) {
+        TODO("Not yet implemented")
+    }
+
     override fun sendEquipmentChange(entity: LivingEntity, slot: EquipmentSlot, item: ItemStack) {
         TODO("Not yet implemented")
     }
@@ -1648,6 +1671,10 @@ class SortingPlayer(
     }
 
     override fun updateInventory() {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPreviousGameMode(): GameMode? {
         TODO("Not yet implemented")
     }
 
@@ -1799,7 +1826,23 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
-    override fun setResourcePack(url: String, hash: ByteArray) {
+    override fun setResourcePack(url: String, hash: ByteArray?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun setResourcePack(url: String, hash: ByteArray?, prompt: String?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun setResourcePack(url: String, hash: ByteArray?, force: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+    override fun setResourcePack(url: String, hash: ByteArray?, prompt: String?, force: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+    override fun setResourcePack(url: String, hash: ByteArray?, prompt: Component?, force: Boolean) {
         TODO("Not yet implemented")
     }
 
