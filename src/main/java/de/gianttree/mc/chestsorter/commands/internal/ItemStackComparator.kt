@@ -24,26 +24,8 @@ object ItemStackComparator : Comparator<ItemStack> {
         }, Comparator.nullsLast(Comparator.comparing(Function.identity()))).thenComparingInt {
             -it.amount
         }.thenComparingInt {
-            if (it.hasItemMeta()) {
+            if (it.hasItemMeta() && it.itemMeta is Damageable) {
                 (it.itemMeta as Damageable).damage
-            } else {
-                0
-            }
-        }.thenComparingInt {
-            if (it.hasItemMeta()) {
-                it.itemMeta.enchants.keys.sumOf { enchantment ->
-                    enchantment.rarity.weight
-                }
-            } else {
-                0
-            }
-        }.thenComparingInt {
-            // Handle enchanted books
-            if (it.hasItemMeta() && it.itemMeta is EnchantmentStorageMeta) {
-                val meta = it.itemMeta as EnchantmentStorageMeta
-                meta.storedEnchants.keys.sumOf { enchantment ->
-                    enchantment.rarity.weight
-                }
             } else {
                 0
             }

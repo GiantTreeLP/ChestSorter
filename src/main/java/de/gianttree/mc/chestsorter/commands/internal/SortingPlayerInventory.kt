@@ -27,7 +27,7 @@ class SortingPlayerInventory(private val inventory: Inventory) : PlayerInventory
         TODO("Not yet implemented")
     }
 
-    override fun getItem(slot: EquipmentSlot): ItemStack? {
+    override fun getItem(slot: EquipmentSlot): ItemStack {
         TODO("Not yet implemented")
     }
 
@@ -55,19 +55,19 @@ class SortingPlayerInventory(private val inventory: Inventory) : PlayerInventory
         return this.inventory.removeItemAnySlot(*items)
     }
 
-    override fun getContents(): Array<ItemStack?>? {
+    override fun getContents(): Array<out ItemStack?> {
         return this.inventory.contents
     }
 
-    override fun setContents(items: Array<out ItemStack?>?) {
+    override fun setContents(items: Array<out ItemStack?>) {
         this.inventory.contents = items
     }
 
-    override fun getStorageContents(): Array<out ItemStack?>? {
+    override fun getStorageContents(): Array<out ItemStack?> {
         return this.inventory.storageContents
     }
 
-    override fun setStorageContents(items: Array<out ItemStack?>?) {
+    override fun setStorageContents(items: Array<out ItemStack?>) {
         this.inventory.storageContents = items
     }
 
@@ -219,10 +219,12 @@ class SortingPlayerInventory(private val inventory: Inventory) : PlayerInventory
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getItemInHand(): ItemStack {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setItemInHand(stack: ItemStack?) {
         TODO("Not yet implemented")
     }

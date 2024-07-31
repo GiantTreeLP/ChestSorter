@@ -35,6 +35,7 @@ class ChestSorterCommand : TabExecutor {
             )
                 .filter { it.startsWith(args.last()) }
                 .toMutableList()
+
             4 -> return Bukkit.getWorlds().map { it.key.toString() }.toMutableList()
         }
         return null
@@ -42,7 +43,7 @@ class ChestSorterCommand : TabExecutor {
 
     private fun targetBlockLocationToString(sender: CommandSender): String {
         if (sender is LivingEntity) {
-            val targetBlock = sender.getTargetBlock(16) ?: return ""
+            val targetBlock = sender.getTargetBlockExact(16) ?: return ""
             return "${targetBlock.x} ${targetBlock.y} ${targetBlock.z}"
         } else {
             return ""
@@ -56,7 +57,7 @@ class ChestSorterCommand : TabExecutor {
         } else if (args.size == 3 && sender is LivingEntity) {
             Location(sender.world, args[0].toDouble(), args[1].toDouble(), args[2].toDouble()).block
         } else if (args.isEmpty() && sender is LivingEntity) {
-            sender.getTargetBlock(16)
+            sender.getTargetBlockExact(16)
         } else {
             null
         }
@@ -102,7 +103,7 @@ class ChestSorterCommand : TabExecutor {
                 val cursor = event.cursor
                 indices.add(slot)
 
-                if (cursor != null && cursor.type != Material.AIR) {
+                if (cursor.type != Material.AIR) {
                     items.add(cursor)
                     container = targetBlock.location.block.state as Container
                     inventory = container.inventory
@@ -119,7 +120,7 @@ class ChestSorterCommand : TabExecutor {
                 }
             } else {
                 val cursor = event.cursor
-                if (cursor != null && cursor.type != Material.AIR) {
+                if (cursor.type != Material.AIR) {
                     indices.add(slot)
                     items.add(cursor)
                     container = targetBlock.location.block.state as Container
@@ -150,7 +151,7 @@ class ChestSorterCommand : TabExecutor {
 
             if (event.callEvent()) {
                 val cursor = event.cursor
-                if (cursor == null || cursor.type == Material.AIR) {
+                if (cursor.type == Material.AIR) {
                     container = targetBlock.location.block.state as Container
                     inventory = container.inventory
                     // nothing to do, event did handle it
@@ -161,7 +162,7 @@ class ChestSorterCommand : TabExecutor {
                 val cursor = event.cursor
                 container = targetBlock.location.block.state as Container
                 inventory = container.inventory
-                if (cursor == null || cursor.type == Material.AIR) {
+                if (cursor.type == Material.AIR) {
                     // even though the event was cancelled, it did handle placing the item
                 } else {
                     sender.sendMessage(
