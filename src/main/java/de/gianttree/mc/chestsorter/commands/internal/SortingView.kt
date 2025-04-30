@@ -9,6 +9,7 @@ import org.bukkit.inventory.InventoryView.OUTSIDE
 import org.bukkit.inventory.ItemStack
 
 
+@Suppress("removal", "DEPRECATION")
 class SortingView(
     private val inventory: Inventory,
     private val player: SortingPlayer
@@ -37,7 +38,7 @@ class SortingView(
         if (inventory != null) {
             inventory.setItem(convertSlot(slot), item)
         } else if (item != null) {
-            getPlayer().world.dropItemNaturally(getPlayer().location, item)
+            player.world.dropItemNaturally(player.location, item)
         }
     }
 
@@ -46,26 +47,26 @@ class SortingView(
     }
 
     override fun setCursor(item: ItemStack?) {
-        getPlayer().setItemOnCursor(item)
+        player.setItemOnCursor(item)
     }
 
     override fun getCursor(): ItemStack {
-        return getPlayer().itemOnCursor
+        return player.itemOnCursor
     }
 
     override fun getInventory(rawSlot: Int): Inventory? {
         // Slot may be -1 if not properly detected due to client bug
         // e.g. dropping an item into part of the enchantment list section of an enchanting table
         if (rawSlot == OUTSIDE || rawSlot == -1) {
-            return null;
+            return null
         }
-        Preconditions.checkArgument(rawSlot >= 0, "Negative, non outside slot %s", rawSlot);
-        Preconditions.checkArgument(rawSlot < countSlots(), "Slot %s greater than inventory slot count", rawSlot);
+        Preconditions.checkArgument(rawSlot >= 0, "Negative, non outside slot %s", rawSlot)
+        Preconditions.checkArgument(rawSlot < countSlots(), "Slot %s greater than inventory slot count", rawSlot)
 
         return if (rawSlot < topInventory.size) {
-            topInventory;
+            topInventory
         } else {
-            bottomInventory;
+            bottomInventory
         }
 
     }
@@ -183,7 +184,7 @@ class SortingView(
                     InventoryType.SlotType.CRAFTING
                 }
 
-                InventoryType.LOOM, InventoryType.SMITHING, InventoryType.SMITHING_NEW -> type = if (slot == 3) {
+                InventoryType.LOOM, InventoryType.SMITHING -> type = if (slot == 3) {
                     InventoryType.SlotType.RESULT
                 } else {
                     InventoryType.SlotType.CRAFTING
@@ -207,16 +208,20 @@ class SortingView(
         return type
     }
 
+    override fun open() {
+        return // Ignored
+    }
+
     override fun close() {
-        getPlayer().closeInventory()
+        player.closeInventory()
     }
 
     override fun countSlots(): Int {
-        return topInventory.size + bottomInventory.size;
+        return topInventory.size + bottomInventory.size
     }
 
     override fun setProperty(prop: InventoryView.Property, value: Int): Boolean {
-        return getPlayer().setWindowProperty(prop, value)
+        return player.setWindowProperty(prop, value)
     }
 
     @Deprecated("Deprecated in Java")
@@ -224,10 +229,12 @@ class SortingView(
         return "Sorting inventory"
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getOriginalTitle(): String {
         return originalTitle
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setTitle(title: String) {
         return // Ignored
     }

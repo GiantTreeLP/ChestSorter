@@ -1,3 +1,5 @@
+@file:Suppress("removal")
+
 package de.gianttree.mc.chestsorter.commands.internal
 
 import com.destroystokyo.paper.ClientOption
@@ -5,11 +7,15 @@ import com.destroystokyo.paper.Title
 import com.destroystokyo.paper.block.TargetBlockInfo
 import com.destroystokyo.paper.entity.TargetEntityInfo
 import com.destroystokyo.paper.profile.PlayerProfile
+import io.papermc.paper.datacomponent.DataComponentType
 import io.papermc.paper.entity.LookAnchor
+import io.papermc.paper.entity.PlayerGiveResult
 import io.papermc.paper.entity.TeleportFlag
 import io.papermc.paper.math.Position
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler
+import io.papermc.paper.world.damagesource.CombatTracker
 import net.kyori.adventure.bossbar.BossBar
+import net.kyori.adventure.key.Key
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.util.TriState
 import net.md_5.bungee.api.chat.BaseComponent
@@ -57,6 +63,7 @@ import java.util.*
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
+@Suppress("UnstableApiUsage", "DEPRECATION")
 class SortingPlayer(
     private val sender: CommandSender,
     private val location: Location
@@ -123,7 +130,7 @@ class SortingPlayer(
     }
 
     @Deprecated("Deprecated in Java")
-    override fun showTitle(title: Array<out BaseComponent?>?) {
+    override fun showTitle(title: Array<out BaseComponent?>) {
         TODO("Not yet implemented")
     }
 
@@ -134,8 +141,8 @@ class SortingPlayer(
 
     @Deprecated("Deprecated in Java")
     override fun showTitle(
-        title: Array<out BaseComponent?>?,
-        subtitle: Array<out BaseComponent?>?,
+        title: Array<out BaseComponent?>,
+        subtitle: Array<out BaseComponent?>,
         fadeInTicks: Int,
         stayTicks: Int,
         fadeOutTicks: Int
@@ -326,6 +333,25 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    override fun sendEntityEffect(effect: EntityEffect, target: Entity) {
+        TODO("Not yet implemented")
+    }
+
+    override fun give(
+        items: Collection<ItemStack>,
+        dropIfFull: Boolean,
+    ): PlayerGiveResult {
+        TODO("Not yet implemented")
+    }
+
+    override fun getDeathScreenScore(): Int {
+        TODO("Not yet implemented")
+    }
+
+    override fun setDeathScreenScore(score: Int) {
+        TODO("Not yet implemented")
+    }
+
     override fun name(): Component {
         return this.sender.name()
     }
@@ -338,10 +364,12 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getCustomName(): String? {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setCustomName(name: String?) {
         TODO("Not yet implemented")
     }
@@ -380,6 +408,7 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun isOnGround(): Boolean {
         TODO("Not yet implemented")
     }
@@ -500,10 +529,12 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getPassenger(): Entity? {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setPassenger(passenger: Entity): Boolean {
         TODO("Not yet implemented")
     }
@@ -615,6 +646,10 @@ class SortingPlayer(
     }
 
     override fun getTrackedBy(): MutableSet<Player> {
+        TODO("Not yet implemented")
+    }
+
+    override fun isTrackedBy(player: Player): Boolean {
         TODO("Not yet implemented")
     }
 
@@ -730,18 +765,22 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun isInBubbleColumn(): Boolean {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun isInWaterOrRain(): Boolean {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun isInWaterOrBubbleColumn(): Boolean {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun isInWaterOrRainOrBubbleColumn(): Boolean {
         TODO("Not yet implemented")
     }
@@ -754,6 +793,7 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getTrackedPlayers(): MutableSet<Player> {
         TODO("Not yet implemented")
     }
@@ -802,6 +842,10 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    override fun broadcastHurtAnimation(players: Collection<Player?>) {
+        TODO("Not yet implemented")
+    }
+
     override fun damage(amount: Double) {
         TODO("Not yet implemented")
     }
@@ -834,14 +878,17 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getMaxHealth(): Double {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setMaxHealth(health: Double) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun resetMaxHealth() {
         TODO("Not yet implemented")
     }
@@ -1054,6 +1101,7 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun addPotionEffect(effect: PotionEffect, force: Boolean): Boolean {
         TODO("Not yet implemented")
     }
@@ -1134,11 +1182,16 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setSwimming(swimming: Boolean) {
         TODO("Not yet implemented")
     }
 
     override fun isRiptiding(): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun setRiptiding(riptiding: Boolean) {
         TODO("Not yet implemented")
     }
 
@@ -1247,10 +1300,12 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getArrowsStuck(): Int {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setArrowsStuck(arrows: Int) {
         TODO("Not yet implemented")
     }
@@ -1379,6 +1434,10 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    override fun getCombatTracker(): CombatTracker {
+        TODO("Not yet implemented")
+    }
+
     override fun getInventory(): PlayerInventory {
         return this.inventory
     }
@@ -1391,6 +1450,7 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setWindowProperty(prop: InventoryView.Property, value: Int): Boolean {
         TODO("Not yet implemented")
     }
@@ -1415,42 +1475,52 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun openWorkbench(location: Location?, force: Boolean): InventoryView? {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun openEnchanting(location: Location?, force: Boolean): InventoryView? {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun openMerchant(trader: Villager, force: Boolean): InventoryView? {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun openMerchant(merchant: Merchant, force: Boolean): InventoryView? {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun openAnvil(location: Location?, force: Boolean): InventoryView? {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun openCartographyTable(location: Location?, force: Boolean): InventoryView? {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun openGrindstone(location: Location?, force: Boolean): InventoryView? {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun openLoom(location: Location?, force: Boolean): InventoryView? {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun openSmithingTable(location: Location?, force: Boolean): InventoryView? {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun openStonecutter(location: Location?, force: Boolean): InventoryView? {
         TODO("Not yet implemented")
     }
@@ -1463,10 +1533,12 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getItemInHand(): ItemStack {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setItemInHand(item: ItemStack?) {
         TODO("Not yet implemented")
     }
@@ -1499,11 +1571,37 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    override fun hasCooldown(item: ItemStack): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun getCooldown(item: ItemStack): Int {
+        TODO("Not yet implemented")
+    }
+
+    override fun setCooldown(item: ItemStack, ticks: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getCooldown(key: Key): Int {
+        TODO("Not yet implemented")
+    }
+
+    override fun setCooldown(key: Key, ticks: Int) {
+        TODO("Not yet implemented")
+    }
+
     override fun getSleepTicks(): Int {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getPotentialBedLocation(): Location? {
+        TODO("Not yet implemented")
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun getPotentialRespawnLocation(): Location? {
         TODO("Not yet implemented")
     }
 
@@ -1516,6 +1614,14 @@ class SortingPlayer(
     }
 
     override fun wakeup(setSpawnLocation: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+    override fun startRiptideAttack(
+        duration: Int,
+        attackStrength: Float,
+        attackItem: ItemStack?,
+    ) {
         TODO("Not yet implemented")
     }
 
@@ -1590,22 +1696,27 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getShoulderEntityLeft(): Entity? {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setShoulderEntityLeft(entity: Entity?) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getShoulderEntityRight(): Entity? {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setShoulderEntityRight(entity: Entity?) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun openSign(sign: Sign) {
         TODO("Not yet implemented")
     }
@@ -1615,6 +1726,32 @@ class SortingPlayer(
     }
 
     override fun dropItem(dropAll: Boolean): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun dropItem(
+        slot: Int,
+        amount: Int,
+        throwRandomly: Boolean,
+        entityOperation: Consumer<Item>?,
+    ): Item? {
+        TODO("Not yet implemented")
+    }
+
+    override fun dropItem(
+        slot: EquipmentSlot,
+        amount: Int,
+        throwRandomly: Boolean,
+        entityOperation: Consumer<Item>?,
+    ): Item? {
+        TODO("Not yet implemented")
+    }
+
+    override fun dropItem(
+        itemStack: ItemStack,
+        throwRandomly: Boolean,
+        entityOperation: Consumer<Item>?,
+    ): Item? {
         TODO("Not yet implemented")
     }
 
@@ -1702,6 +1839,7 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun sendRawMessage(sender: UUID?, message: String) {
         TODO("Not yet implemented")
     }
@@ -1777,6 +1915,7 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getLastPlayed(): Long {
         TODO("Not yet implemented")
     }
@@ -1785,6 +1924,7 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getBedSpawnLocation(): Location? {
         TODO("Not yet implemented")
     }
@@ -1798,6 +1938,10 @@ class SortingPlayer(
     }
 
     override fun getRespawnLocation(): Location? {
+        TODO("Not yet implemented")
+    }
+
+    override fun getRespawnLocation(loadLocationAndValidate: Boolean): Location? {
         TODO("Not yet implemented")
     }
 
@@ -1905,10 +2049,12 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getDisplayName(): String {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setDisplayName(name: String?) {
         TODO("Not yet implemented")
     }
@@ -1929,38 +2075,55 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getPlayerListName(): String {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setPlayerListName(name: String?) {
         TODO("Not yet implemented")
     }
 
+    override fun getPlayerListOrder(): Int {
+        TODO("Not yet implemented")
+    }
+
+    override fun setPlayerListOrder(order: Int) {
+        TODO("Not yet implemented")
+    }
+
+    @Deprecated("Deprecated in Java")
     override fun getPlayerListHeader(): String? {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getPlayerListFooter(): String? {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setPlayerListHeader(header: String?) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setPlayerListFooter(footer: String?) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setPlayerListHeaderFooter(header: String?, footer: String?) {
         TODO("Not yet implemented")
     }
 
-    override fun setPlayerListHeaderFooter(header: Array<out BaseComponent?>?, footer: Array<out BaseComponent?>?) {
+    @Deprecated("Deprecated in Java")
+    override fun setPlayerListHeaderFooter(header: Array<out BaseComponent>?, footer: Array<out BaseComponent>?) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setPlayerListHeaderFooter(header: BaseComponent?, footer: BaseComponent?) {
         TODO("Not yet implemented")
     }
@@ -1993,6 +2156,7 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun kickPlayer(message: String?) {
         TODO("Not yet implemented")
     }
@@ -2079,10 +2243,12 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setBedSpawnLocation(location: Location?) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setBedSpawnLocation(location: Location?, force: Boolean) {
         TODO("Not yet implemented")
     }
@@ -2095,6 +2261,15 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    override fun getEnderPearls(): Collection<EnderPearl> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getCurrentInput(): Input {
+        TODO("Not yet implemented")
+    }
+
+    @Deprecated("Deprecated in Java")
     override fun playNote(loc: Location, instrument: Byte, note: Byte) {
         TODO("Not yet implemented")
     }
@@ -2111,6 +2286,7 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun sendBlockChange(loc: Location, material: Material, data: Byte) {
         TODO("Not yet implemented")
     }
@@ -2123,6 +2299,7 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun sendBlockChanges(blocks: MutableCollection<BlockState>, suppressLightUpdates: Boolean) {
         TODO("Not yet implemented")
     }
@@ -2147,7 +2324,7 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
-    override fun sendEquipmentChange(entity: LivingEntity, items: MutableMap<EquipmentSlot, ItemStack>) {
+    override fun sendEquipmentChange(entity: LivingEntity, items: MutableMap<EquipmentSlot, ItemStack?>) {
         TODO("Not yet implemented")
     }
 
@@ -2162,17 +2339,19 @@ class SortingPlayer(
     }
 
     @Deprecated("Deprecated in Java")
-    override fun sendSignChange(loc: Location, lines: Array<out String?>?) {
+    override fun sendSignChange(loc: Location, lines: Array<out String?>) {
         TODO("Not yet implemented")
     }
 
-    override fun sendSignChange(loc: Location, lines: Array<out String?>?, dyeColor: DyeColor) {
+    @Deprecated("Deprecated in Java")
+    override fun sendSignChange(loc: Location, lines: Array<out String?>, dyeColor: DyeColor) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun sendSignChange(
         loc: Location,
-        lines: Array<out String?>?,
+        lines: Array<out String?>,
         dyeColor: DyeColor,
         hasGlowingText: Boolean
     ) {
@@ -2207,34 +2386,42 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setTitleTimes(fadeInTicks: Int, stayTicks: Int, fadeOutTicks: Int) {
         TODO("Not yet implemented")
     }
 
-    override fun setSubtitle(subtitle: Array<out BaseComponent>?) {
+    @Deprecated("Deprecated in Java")
+    override fun setSubtitle(subtitle: Array<out BaseComponent>) {
         TODO("Not yet implemented")
     }
 
-    override fun setSubtitle(subtitle: BaseComponent?) {
+    @Deprecated("Deprecated in Java")
+    override fun setSubtitle(subtitle: BaseComponent) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun sendTitle(@Suppress("DEPRECATION") title: Title) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun sendTitle(title: String?, subtitle: String?) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun sendTitle(title: String?, subtitle: String?, fadeIn: Int, stay: Int, fadeOut: Int) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun updateTitle(@Suppress("DEPRECATION") title: Title) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun hideTitle() {
         TODO("Not yet implemented")
     }
@@ -2379,6 +2566,7 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun hidePlayer(player: Player) {
         TODO("Not yet implemented")
     }
@@ -2387,6 +2575,7 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun showPlayer(player: Player) {
         TODO("Not yet implemented")
     }
@@ -2447,26 +2636,32 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setTexturePack(url: String) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setResourcePack(url: String) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setResourcePack(url: String, hash: ByteArray?) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setResourcePack(url: String, hash: ByteArray?, prompt: String?) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setResourcePack(url: String, hash: ByteArray?, force: Boolean) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setResourcePack(url: String, hash: ByteArray?, prompt: String?, force: Boolean) {
         TODO("Not yet implemented")
     }
@@ -2475,6 +2670,7 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setResourcePack(id: UUID, url: String, hash: ByteArray?, prompt: String?, force: Boolean) {
         TODO("Not yet implemented")
     }
@@ -2709,6 +2905,7 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getLocale(): String {
         TODO("Not yet implemented")
     }
@@ -2737,10 +2934,12 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getNoTickViewDistance(): Int {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setNoTickViewDistance(viewDistance: Int) {
         TODO("Not yet implemented")
     }
@@ -2778,7 +2977,7 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
-    override fun addResourcePack(id: UUID, url: String, hash: ByteArray?, prompt: String?, force: Boolean) {
+    override fun addResourcePack(id: UUID, url: String, hash: ByteArray, prompt: String?, force: Boolean) {
         TODO("Not yet implemented")
     }
 
@@ -2810,6 +3009,7 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun boostElytra(firework: ItemStack): Firework? {
         TODO("Not yet implemented")
     }
@@ -2818,10 +3018,12 @@ class SortingPlayer(
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun addAdditionalChatCompletions(completions: MutableCollection<String>) {
         TODO("Not yet implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun removeAdditionalChatCompletions(completions: MutableCollection<String>) {
         TODO("Not yet implemented")
     }
@@ -2887,6 +3089,21 @@ class SortingPlayer(
     }
 
     override fun isChunkSent(chunkKey: Long): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun <T : Any> getData(type: DataComponentType.Valued<T>): T? {
+        TODO("Not yet implemented")
+    }
+
+    override fun <T : Any> getDataOrDefault(
+        type: DataComponentType.Valued<out T>,
+        fallback: T?,
+    ): T? {
+        TODO("Not yet implemented")
+    }
+
+    override fun hasData(type: DataComponentType): Boolean {
         TODO("Not yet implemented")
     }
 

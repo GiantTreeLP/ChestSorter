@@ -179,11 +179,11 @@ class SortingPlayerInventory(private val inventory: Inventory) : PlayerInventory
         TODO("Not yet implemented")
     }
 
-    override fun setArmorContents(items: Array<out ItemStack?>?) {
+    override fun setArmorContents(items: Array<out ItemStack?>) {
         TODO("Not yet implemented")
     }
 
-    override fun setExtraContents(items: Array<out ItemStack?>?) {
+    override fun setExtraContents(items: Array<out ItemStack?>) {
         TODO("Not yet implemented")
     }
 
