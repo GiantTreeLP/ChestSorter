@@ -72,6 +72,13 @@ class SortingPlayer(
     internal var cursor: ItemStack = ItemStack(Material.AIR)
     internal var inventory: PlayerInventory = SortingPlayerInventory(Bukkit.createInventory(null, InventoryType.PLAYER))
 
+    @JvmField
+    val uniqueId: UUID = if (sender is Entity) {
+        sender.uniqueId
+    } else {
+        UUID.randomUUID()
+    }
+
     override fun getAttribute(attribute: Attribute): AttributeInstance? {
         TODO("Not yet implemented")
     }
@@ -577,7 +584,7 @@ class SortingPlayer(
     }
 
     override fun getUniqueId(): UUID {
-        TODO("Not yet implemented")
+        return this.uniqueId
     }
 
     override fun getTicksLived(): Int {

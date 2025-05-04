@@ -7,6 +7,7 @@ import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.InventoryView
 import org.bukkit.inventory.InventoryView.OUTSIDE
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.MenuType
 
 
 @Suppress("removal", "DEPRECATION")
@@ -237,6 +238,42 @@ class SortingView(
     @Deprecated("Deprecated in Java")
     override fun setTitle(title: String) {
         return // Ignored
+    }
+
+    override fun getMenuType(): MenuType? {
+        return when (inventory.type) {
+            InventoryType.BARREL -> MenuType.GENERIC_9X3
+            InventoryType.CHEST -> MenuType.GENERIC_9X6
+            InventoryType.DISPENSER -> MenuType.GENERIC_9X5
+            InventoryType.DROPPER -> MenuType.GENERIC_9X5
+            InventoryType.FURNACE -> MenuType.FURNACE
+            InventoryType.WORKBENCH -> MenuType.CRAFTING
+            InventoryType.CRAFTING -> MenuType.CRAFTING
+            InventoryType.ENCHANTING -> MenuType.ENCHANTMENT
+            InventoryType.BREWING -> MenuType.BREWING_STAND
+            InventoryType.PLAYER -> MenuType.GENERIC_9X3
+            InventoryType.CREATIVE -> MenuType.GENERIC_9X3
+            InventoryType.MERCHANT -> MenuType.MERCHANT
+            InventoryType.ENDER_CHEST -> MenuType.GENERIC_9X3
+            InventoryType.ANVIL -> MenuType.ANVIL
+            InventoryType.SMITHING -> MenuType.SMITHING
+            InventoryType.BEACON -> MenuType.BEACON
+            InventoryType.HOPPER -> MenuType.HOPPER
+            InventoryType.SHULKER_BOX -> MenuType.SHULKER_BOX
+            InventoryType.BLAST_FURNACE -> MenuType.BLAST_FURNACE
+            InventoryType.LECTERN -> MenuType.LECTERN
+            InventoryType.SMOKER -> MenuType.SMOKER
+            InventoryType.LOOM -> MenuType.LOOM
+            InventoryType.CARTOGRAPHY -> MenuType.CARTOGRAPHY_TABLE
+            InventoryType.GRINDSTONE -> MenuType.GRINDSTONE
+            InventoryType.STONECUTTER -> MenuType.STONECUTTER
+            InventoryType.COMPOSTER -> null
+            InventoryType.CHISELED_BOOKSHELF -> null
+            InventoryType.JUKEBOX -> null
+            InventoryType.DECORATED_POT -> null
+            InventoryType.CRAFTER -> MenuType.CRAFTER_3X3
+            InventoryType.SMITHING_NEW -> MenuType.SMITHING
+        }
     }
 
 }
