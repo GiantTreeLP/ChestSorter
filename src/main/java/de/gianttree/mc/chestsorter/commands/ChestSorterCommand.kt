@@ -80,12 +80,13 @@ class ChestSorterCommand : TabExecutor {
         val items = mutableListOf<ItemStack>()
         val indices = mutableListOf<Int>()
 
-        for (slot in 0 until inventory.size) {
-            val view = SortingView(
-                inventory,
-                SortingPlayer(sender, targetBlock.location)
-            )
+        val player = SortingPlayer.of(sender, targetBlock.location)
+        val view = SortingView(
+            inventory,
+            player
+        )
 
+        for (slot in 0 until inventory.size) {
             if (view.getSlotType(slot) != InventoryType.SlotType.CONTAINER) {
                 continue // Skip non-container slots
             }
@@ -105,7 +106,7 @@ class ChestSorterCommand : TabExecutor {
 
                 if (cursor.type != Material.AIR) {
                     items.add(cursor)
-                    container = targetBlock.location.block.state as Container
+                    container = targetBlock.state as Container
                     inventory = container.inventory
                     continue
                 }
@@ -135,12 +136,7 @@ class ChestSorterCommand : TabExecutor {
         sortedItems.removeIf { it.type == Material.AIR }
 
         indices.zip(sortedItems).forEach { (slot, item) ->
-            val player = SortingPlayer(sender, targetBlock.location)
             player.cursor = item
-            val view = SortingView(
-                inventory,
-                player
-            )
             val event = InventoryClickEvent(
                 view,
                 InventoryType.SlotType.CONTAINER,

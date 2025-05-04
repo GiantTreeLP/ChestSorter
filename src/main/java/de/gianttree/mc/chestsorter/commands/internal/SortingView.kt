@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 package de.gianttree.mc.chestsorter.commands.internal
 
 import com.google.common.base.Preconditions
@@ -11,7 +13,7 @@ import org.bukkit.inventory.MenuType
 
 
 @Suppress("removal", "DEPRECATION")
-class SortingView(
+internal class SortingView(
     private val inventory: Inventory,
     private val player: SortingPlayer
 ) : InventoryView {
